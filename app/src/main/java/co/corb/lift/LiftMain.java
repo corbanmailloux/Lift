@@ -1,26 +1,20 @@
 package co.corb.lift;
 
 import android.app.Activity;
-import android.app.ActionBar;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
-import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.os.Build;
 
 import org.joda.time.DateTime;
 import org.joda.time.Days;
 import org.joda.time.LocalDate;
-
-import java.util.Calendar;
-import java.util.Date;
 
 
 public class LiftMain extends Activity implements Lifted.OnFragmentInteractionListener, DidNotLift.OnFragmentInteractionListener{
@@ -54,6 +48,7 @@ public class LiftMain extends Activity implements Lifted.OnFragmentInteractionLi
         SharedPreferences.Editor editor = preferences.edit();
         editor.putInt("currentStreak", currentStreak);
         editor.putInt("bestStreak", bestStreak);
+        editor.putLong("lastLift", lastLift);
 
         // Commit the edits!
         editor.commit();
