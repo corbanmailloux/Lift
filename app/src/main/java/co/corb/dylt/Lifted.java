@@ -24,8 +24,10 @@ public class Lifted extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "currentStreak";
     private static final String ARG_PARAM2 = "bestStreak";
+    private static final String ARG_PARAM3 = "alreadyLiftedToday";
 
     private int currentStreak, bestStreak;
+    private boolean alreadyLiftedToday;
 
     private OnFragmentInteractionListener mListener;
 
@@ -35,14 +37,16 @@ public class Lifted extends Fragment {
      *
      * @param currentStreak Parameter 1.
      * @param bestStreak Parameter 2.
+     * @param alreadyLiftedToday
      * @return A new instance of fragment Lifted.
      */
     // TODO: Rename and change types and number of parameters
-    public static Lifted newInstance(int currentStreak, int bestStreak) {
+    public static Lifted newInstance(int currentStreak, int bestStreak, boolean alreadyLiftedToday) {
         Lifted fragment = new Lifted();
         Bundle args = new Bundle();
         args.putInt(ARG_PARAM1, currentStreak);
         args.putInt(ARG_PARAM2, bestStreak);
+        args.putBoolean(ARG_PARAM3, alreadyLiftedToday);
         fragment.setArguments(args);
         return fragment;
     }
@@ -56,6 +60,7 @@ public class Lifted extends Fragment {
         if (getArguments() != null) {
             currentStreak = getArguments().getInt(ARG_PARAM1, 0);
             bestStreak = getArguments().getInt(ARG_PARAM2, 0);
+            alreadyLiftedToday = getArguments().getBoolean(ARG_PARAM3);
         }
     }
 
@@ -64,10 +69,23 @@ public class Lifted extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View tempView = inflater.inflate(R.layout.fragment_lifted, container, false);
+
+        TextView messageText = (TextView) tempView.findViewById(R.id.messageText);
+        if (alreadyLiftedToday)
+        {
+            messageText.setText(R.string.lifted_already_lifted);
+        }
+        else
+        {
+            messageText.setText(R.string.lifted_congrats);
+        }
+
         TextView bestStreakText = (TextView) tempView.findViewById(R.id.bestStreakText);
         bestStreakText.setText(Integer.toString(bestStreak));
+
         TextView currentStreakText = (TextView) tempView.findViewById(R.id.currentStreakText);
         currentStreakText.setText(Integer.toString(currentStreak));
+
         return tempView;
     }
 

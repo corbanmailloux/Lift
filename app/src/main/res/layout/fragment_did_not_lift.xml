@@ -8,7 +8,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/weak_go_lift"
-        android:id="@+id/textView"
+        android:id="@+id/messageText"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="52dp" />

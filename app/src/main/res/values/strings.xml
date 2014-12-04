@@ -8,6 +8,7 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="lifted_congrats">Congratulations! You lifted!</string>
+    <string name="lifted_already_lifted">You already lifted today.</string>
     <string name="weak_go_lift">Weak. Go lift.</string>
 
 </resources>

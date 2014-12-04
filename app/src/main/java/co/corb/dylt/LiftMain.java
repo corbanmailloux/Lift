@@ -43,7 +43,7 @@ public class LiftMain extends Activity implements Lifted.OnFragmentInteractionLi
     {
         super.onStop();
 
-        // We need an Editor object to make preference changes.
+        // Save the streak data.
         SharedPreferences preferences = getPreferences(MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putInt("currentStreak", currentStreak);
@@ -77,6 +77,8 @@ public class LiftMain extends Activity implements Lifted.OnFragmentInteractionLi
 
     public void btnYesClick(View v)
     {
+        boolean alreadyLiftedToday = false;
+
         // First run.
         if (lastLift == 0L)
         {
@@ -87,7 +89,11 @@ public class LiftMain extends Activity implements Lifted.OnFragmentInteractionLi
                     Days.daysBetween(new LocalDate(lastLift).toDateTimeAtStartOfDay(),
                             new LocalDate().toDateTimeAtStartOfDay()).getDays();
 
-            if (daysBetween == 1)
+            if (daysBetween == 0)
+            {
+                alreadyLiftedToday = true;
+            }
+            else if (daysBetween == 1)
             {
                 // It's been a day. Add to the streak.
                 currentStreak++;
@@ -107,7 +113,7 @@ public class LiftMain extends Activity implements Lifted.OnFragmentInteractionLi
             bestStreak = currentStreak;
         }
 
-        Lifted lifted = Lifted.newInstance(currentStreak, bestStreak);
+        Lifted lifted = Lifted.newInstance(currentStreak, bestStreak, alreadyLiftedToday);
 
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
 

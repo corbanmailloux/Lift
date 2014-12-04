@@ -8,7 +8,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/lifted_congrats"
-        android:id="@+id/textView"
+        android:id="@+id/messageText"
         android:layout_marginTop="39dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
@@ -20,7 +20,7 @@
         android:id="@+id/bestStreakText"
         android:layout_marginTop="69dp"
         android:text="Best Streak"
-        android:layout_below="@+id/textView"
+        android:layout_below="@+id/messageText"
         android:layout_alignLeft="@+id/currentStreakText"
         android:layout_alignStart="@+id/currentStreakText" />
 
@@ -30,9 +30,9 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:id="@+id/currentStreakText"
         android:text="Current Streak"
-        android:layout_below="@+id/textView"
-        android:layout_alignRight="@+id/textView"
-        android:layout_alignEnd="@+id/textView"
+        android:layout_below="@+id/messageText"
+        android:layout_alignRight="@+id/messageText"
+        android:layout_alignEnd="@+id/messageText"
         android:layout_marginTop="24dp" />
 
     <TextView

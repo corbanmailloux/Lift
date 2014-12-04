@@ -8,7 +8,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/did_you_lift_today"
-        android:id="@+id/textView"
+        android:id="@+id/messageText"
         android:layout_marginTop="23dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:text="@string/yes"
         android:id="@+id/btnYes"
-        android:layout_below="@+id/textView"
+        android:layout_below="@+id/messageText"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="37dp"
         android:onClick="btnYesClick" />
