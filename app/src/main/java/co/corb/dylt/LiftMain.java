@@ -3,6 +3,7 @@ package co.corb.dylt;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
@@ -19,8 +20,8 @@ import org.joda.time.LocalDate;
 
 public class LiftMain extends Activity implements Lifted.OnFragmentInteractionListener, DidNotLift.OnFragmentInteractionListener{
 
-    public int currentStreak, bestStreak;
-    public long lastLift;
+    private int currentStreak, bestStreak;
+    private long lastLift;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +52,7 @@ public class LiftMain extends Activity implements Lifted.OnFragmentInteractionLi
         editor.putLong("lastLift", lastLift);
 
         // Commit the edits!
-        editor.commit();
+        editor.apply();
     }
 
 
@@ -128,7 +129,7 @@ public class LiftMain extends Activity implements Lifted.OnFragmentInteractionLi
 
     public void btnNoClick(View v)
     {
-        DidNotLift didNotLift = DidNotLift.newInstance("","");
+        DidNotLift didNotLift = DidNotLift.newInstance();
 
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
 
@@ -139,6 +140,20 @@ public class LiftMain extends Activity implements Lifted.OnFragmentInteractionLi
 
         // Commit the transaction
         transaction.commit();
+    }
+
+    public void btnFindGymClick(View v)
+    {
+        Uri geo = Uri.parse("geo:0,0?q=gym");
+        showMap(geo);
+    }
+
+    private void showMap(Uri geoLocation) {
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(geoLocation);
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
     }
 
     @Override
@@ -157,8 +172,7 @@ public class LiftMain extends Activity implements Lifted.OnFragmentInteractionLi
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_lift_main, container, false);
-            return rootView;
+            return inflater.inflate(R.layout.fragment_lift_main, container, false);
         }
     }
 }

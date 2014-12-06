@@ -20,7 +20,6 @@ import android.widget.TextView;
  *
  */
 public class Lifted extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "currentStreak";
     private static final String ARG_PARAM2 = "bestStreak";
@@ -35,12 +34,11 @@ public class Lifted extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param currentStreak Parameter 1.
-     * @param bestStreak Parameter 2.
-     * @param alreadyLiftedToday
+     * @param currentStreak The current streak.
+     * @param bestStreak The best recorded streak.
+     * @param alreadyLiftedToday Indicates if the user already lifted today.
      * @return A new instance of fragment Lifted.
      */
-    // TODO: Rename and change types and number of parameters
     public static Lifted newInstance(int currentStreak, int bestStreak, boolean alreadyLiftedToday) {
         Lifted fragment = new Lifted();
         Bundle args = new Bundle();
@@ -87,13 +85,6 @@ public class Lifted extends Fragment {
         currentStreakText.setText(Integer.toString(currentStreak));
 
         return tempView;
-    }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
     }
 
     @Override

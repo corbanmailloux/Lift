@@ -10,5 +10,10 @@
     <string name="lifted_congrats">Congratulations! You lifted!</string>
     <string name="lifted_already_lifted">You already lifted today.</string>
     <string name="weak_go_lift">Weak. Go lift.</string>
+    <string name="find_gym">Find Nearby Gyms</string>
+    <string name="current_streak">Current Streak</string>
+    <string name="best_streak">Best Streak</string>
+    <string name="current_streak_label">Current Streak:</string>
+    <string name="best_streak_label">Best Streak:</string>
 
 </resources>

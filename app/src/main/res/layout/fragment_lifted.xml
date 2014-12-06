@@ -19,7 +19,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:id="@+id/bestStreakText"
         android:layout_marginTop="69dp"
-        android:text="Best Streak"
+        android:text="@string/best_streak"
         android:layout_below="@+id/messageText"
         android:layout_alignLeft="@+id/currentStreakText"
         android:layout_alignStart="@+id/currentStreakText" />
@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:id="@+id/currentStreakText"
-        android:text="Current Streak"
+        android:text="@string/current_streak"
         android:layout_below="@+id/messageText"
         android:layout_alignRight="@+id/messageText"
         android:layout_alignEnd="@+id/messageText"
@@ -39,18 +39,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Current Streak:"
+        android:text="@string/current_streak_label"
         android:id="@+id/textView3"
         android:layout_alignTop="@+id/currentStreakText"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginLeft="26dp" />
+        android:layout_marginStart="26dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Best Streak:"
+        android:text="@string/best_streak_label"
         android:id="@+id/textView4"
         android:layout_alignTop="@+id/bestStreakText"
         android:layout_alignLeft="@+id/textView3"
