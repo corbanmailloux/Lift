@@ -68,4 +68,14 @@
         android:layout_alignEnd="@+id/textView3"
         android:gravity="left" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/share_your_streak"
+        android:id="@+id/shareButton"
+        android:layout_below="@+id/bestStreakText"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="70dp"
+        android:onClick="btnShareClick" />
+
 </RelativeLayout>

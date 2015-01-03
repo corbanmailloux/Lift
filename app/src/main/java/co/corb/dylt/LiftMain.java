@@ -148,6 +148,27 @@ public class LiftMain extends Activity implements Lifted.OnFragmentInteractionLi
         showMap(geo);
     }
 
+    public void btnShareClick(View v)
+    {
+        Intent sendIntent = new Intent();
+        sendIntent.setAction(Intent.ACTION_SEND);
+        sendIntent.putExtra(Intent.EXTRA_TEXT, getShareString());
+        sendIntent.setType("text/plain");
+        startActivity(Intent.createChooser(sendIntent, getResources().getText(R.string.share_your_streak)));
+    }
+
+    private String getShareString()
+    {
+        if (currentStreak == 1)
+        {
+            return "I lifted today. Did You Lift Today? http://dylt.corb.co";
+        }
+        else
+        {
+            return String.format("I've lifted %d days in a row. Did You Lift Today? http://dylt.corb.co", currentStreak);
+        }
+    }
+
     private void showMap(Uri geoLocation) {
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setData(geoLocation);

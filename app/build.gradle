@@ -8,8 +8,8 @@ android {
         applicationId "co.corb.dylt"
         minSdkVersion 14
         targetSdkVersion 21
-        versionCode 4
-        versionName "2.3"
+        versionCode 5
+        versionName "2.4"
     }
     buildTypes {
         release {
