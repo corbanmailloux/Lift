@@ -31,7 +31,7 @@ if (localStorage.lastLift) {
 }
 
 if (lastLift) {
-  var daysBetween = (lastLift.startOf("day")).diff((now.startOf("day")), "days");
+  var daysBetween = (now.startOf("day")).diff((lastLift.startOf("day")), "days");
 
   switch (daysBetween) {
     case 0:
