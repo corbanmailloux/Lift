@@ -1,0 +1,26 @@
+---
+---
+<div class="alert alert-danger" role="alert" id="noLocalStorage" style="display: none;">
+    <strong>Uh oh!</strong> You're browser isn't allowing access to localStorage. Did You Lift Today will not work. :(
+</div>
+<div class="jumbotron" id="mainContent">
+    <div class="container">
+        <h1 class="text-center" id="headerText"></h1>
+        <table class="table">
+            <tr>
+                <td>Current Streak</td>
+                <td id="currentStreak">1</td>
+            </tr>
+            <tr>
+                <td>Best Streak</td>
+                <td id="bestStreak">1</td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<!-- MomentJS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
+
+<!-- Custom JS, for cookies -->
+<script src="/js/didyoulifttoday.js"></script>
