@@ -1,7 +1,21 @@
 <nav class="navbar navbar-default navbar-static-top">
     <div class="container">
         <div class="navbar-header">
-            <a class="navbar-brand" href="{{ site.url }}">Did You Lift Today?</a>
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{{ site.url }}">
+                <span><img src="{{ site.url }}/images/logo.png"></span>
+                Did You Lift Today?
+            </a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse navbar-right">
+            <ul class="nav navbar-nav">
+                <li><a href="https://play.google.com/store/apps/details?id=co.corb.dylt" target="_blank"><i class="fa fa-android"></i> Android App on the Play Store</a></li>
+            </ul>
         </div>
     </div>
 </nav>
