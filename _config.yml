@@ -12,7 +12,6 @@ description: >
   Well now you can have your phone or tablet ask you, giving you that positive, self-righteous feeling as often as you want. 
   When you admit that you haven't actually lifted today, the app will help you find a nearby gym. 
   No excuses; lift like a champion.
-baseurl: "" # the subpath of your site, e.g. /blog
 url: "http://corb.co/lift" # the base hostname & protocol for your site
 permalink: pretty # to remove the ".html" extension when serving file
 
