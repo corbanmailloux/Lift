@@ -12,7 +12,7 @@ description: >
   Well now you can have your phone or tablet ask you, giving you that positive, self-righteous feeling as often as you want.
   When you admit that you haven't actually lifted today, the app will help you find a nearby gym.
   No excuses; lift like a champion.
-url: "http://corb.co/Lift" # the base hostname & protocol for your site
+url: "http://lift.corb.co" # the base hostname & protocol for your site
 #url: "http://127.0.0.1:4000" # Dev. URL
 permalink: pretty # to remove the ".html" extension when serving file
 
