@@ -8,6 +8,22 @@
 <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
 <!-- Bootstrap's JS -->
 <script src="/bootstrap/js/bootstrap.min.js"></script>
+
+<script>
+$(document).ready(function(){
+    if (("standalone" in window.navigator) && window.navigator.standalone) {
+      // For iOS Apps
+      $('a').on('click', function(e){
+        e.preventDefault();
+        var new_location = $(this).attr('href');
+        if (new_location != undefined && new_location.substr(0, 1) != '#' && $(this).attr('data-method') == undefined){
+          window.location = new_location;
+        }
+      });
+    }
+  });
+</script>
+
 <!-- Google Analytics -->
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
