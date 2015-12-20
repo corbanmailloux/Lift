@@ -9,8 +9,21 @@
 <!-- Bootstrap's JS -->
 <script src="/bootstrap/js/bootstrap.min.js"></script>
 
+{% comment %} Load in any custom JS from the page. {% endcomment %}
+{% if page.custom_js %}
+  {% for js_file in page.custom_js %}
+    <script src="/js/{{ js_file }}"></script>
+  {% endfor %}
+{% endif %}
+
 <script>
-// From http://stackoverflow.com/a/14765134
+/*
+    For iOS devices in standalone mode (pinned bookmark on the home screen),
+    convert standard <a href="..."> links into JS links. This is needed because
+    iOS forces normal links to be opened in Safari, leaving standalone mode.
+
+    From: http://stackoverflow.com/a/14765134
+*/
 $(document).ready(function(){
     if (("standalone" in window.navigator) && window.navigator.standalone) {
       // For iOS Apps

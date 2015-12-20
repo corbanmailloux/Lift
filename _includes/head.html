@@ -11,6 +11,13 @@
     <link href="/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/css/main.css">
 
+    {% comment %} Load in any custom CSS from the page. {% endcomment %}
+    {% if page.custom_css %}
+        {% for stylesheet in page.custom_css %}
+            <link rel="stylesheet" type="text/css" href="/css/{{ stylesheet }}">
+        {% endfor %}
+    {% endif %}
+
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
