@@ -24,7 +24,7 @@ var bestStreak = 1;
 var now = moment();
 
 // Fragile: If the user removes either of the streak values, bad things happen.
-if (localStorage.lastLift) { 
+if (localStorage.lastLift) {
   lastLift = moment.unix(localStorage.lastLift);
   currentStreak = localStorage.currentStreak;
   bestStreak = localStorage.bestStreak;
@@ -66,3 +66,43 @@ document.getElementById("bestStreak").innerHTML = bestStreak;
 localStorage.setItem("lastLift", lastLift.unix());
 localStorage.setItem("currentStreak", currentStreak);
 localStorage.setItem("bestStreak", bestStreak);
+
+
+/*
+  Set up a countdown timer to indicate when the next lift can happen.
+  Modified from: http://www.sitepoint.com/build-javascript-countdown-timer-no-dependencies/
+*/
+function getTimeRemaining(endtime) {
+  var t = Date.parse(endtime) - Date.now();
+  var seconds = Math.floor((t / 1000) % 60);
+  var minutes = Math.floor((t / 1000 / 60) % 60);
+  var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
+  return {
+    'total': t,
+    'hours': hours,
+    'minutes': minutes,
+    'seconds': seconds
+  };
+}
+
+function initializeClock(id, endtime) {
+  var clock = document.getElementById(id);
+
+  function updateClock() {
+    var t = getTimeRemaining(endtime);
+    clock.innerHTML = (
+      ('0' + t.hours).slice(-2) + ":" +
+      ('0' + t.minutes).slice(-2) + ":" +
+      ('0' + t.seconds).slice(-2)
+    );
+
+    if (t.total <= 0) {
+      clearInterval(timeinterval);
+    }
+  }
+
+  updateClock();
+  var timeinterval = setInterval(updateClock, 1000);
+}
+
+initializeClock("countdown", now.startOf("day").add(1, "day"));
