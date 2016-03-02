@@ -12,16 +12,19 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ShareActionProvider;
 
 import org.joda.time.DateTime;
 import org.joda.time.Days;
 import org.joda.time.LocalDate;
 
 
-public class LiftMain extends Activity implements Lifted.OnFragmentInteractionListener, DidNotLift.OnFragmentInteractionListener{
+public class LiftMain extends Activity implements View.OnClickListener, Lifted.LiftedFragmentListener, DidNotLift.DidNotLiftFragmentListener{
 
     private int currentStreak, bestStreak;
     private long lastLift;
+    private ShareActionProvider mShareActionProvider;
+    private MenuItem shareMenuItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +40,9 @@ public class LiftMain extends Activity implements Lifted.OnFragmentInteractionLi
         currentStreak = preferences.getInt("currentStreak", 0);
         bestStreak = preferences.getInt("bestStreak", 0);
         lastLift = preferences.getLong("lastLift", 0L);
+
+        findViewById(R.id.btnYes).setOnClickListener(this);
+        findViewById(R.id.btnNo).setOnClickListener(this);
     }
 
     @Override
@@ -44,14 +50,14 @@ public class LiftMain extends Activity implements Lifted.OnFragmentInteractionLi
     {
         super.onStop();
 
-        // Save the streak data.
+        // Save the streak data
         SharedPreferences preferences = getPreferences(MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putInt("currentStreak", currentStreak);
         editor.putInt("bestStreak", bestStreak);
         editor.putLong("lastLift", lastLift);
 
-        // Commit the edits!
+        // Commit the edits
         editor.apply();
     }
 
@@ -60,9 +66,28 @@ public class LiftMain extends Activity implements Lifted.OnFragmentInteractionLi
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.lift_main, menu);
+
+        // Locate MenuItem with ShareActionProvider
+        shareMenuItem = menu.findItem(R.id.menu_item_share);
+
+        // Fetch and store ShareActionProvider
+        mShareActionProvider = (ShareActionProvider) shareMenuItem.getActionProvider();
+
+        // Start hidden on the main screen
+        shareMenuItem.setVisible(false);
+
+        updateShareIntent();
+
+        // Return true to display menu
         return true;
     }
 
+    public void setShareVisible(boolean visible)
+    {
+        shareMenuItem.setVisible(visible);
+    }
+
+    /* // Re-enable if I re-add the Settings menu item.
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -73,10 +98,30 @@ public class LiftMain extends Activity implements Lifted.OnFragmentInteractionLi
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }*/
+
+    // Call to update the share intent
+    private void setShareIntent(Intent shareIntent) {
+        if (mShareActionProvider != null) {
+            mShareActionProvider.setShareIntent(shareIntent);
+        }
     }
 
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.btnYes:
+                yesAction();
+                break;
+            case R.id.btnNo:
+                noAction();
+                break;
+            default:
+                throw new RuntimeException("Invalid ID for this onClick handler.");
+        }
+    }
 
-    public void btnYesClick(View v)
+    public void yesAction()
     {
         boolean alreadyLiftedToday = false;
 
@@ -114,6 +159,8 @@ public class LiftMain extends Activity implements Lifted.OnFragmentInteractionLi
             bestStreak = currentStreak;
         }
 
+        updateShareIntent();
+
         Lifted lifted = Lifted.newInstance(currentStreak, bestStreak, alreadyLiftedToday);
 
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
@@ -127,7 +174,7 @@ public class LiftMain extends Activity implements Lifted.OnFragmentInteractionLi
         transaction.commit();
     }
 
-    public void btnNoClick(View v)
+    public void noAction()
     {
         DidNotLift didNotLift = DidNotLift.newInstance();
 
@@ -142,44 +189,44 @@ public class LiftMain extends Activity implements Lifted.OnFragmentInteractionLi
         transaction.commit();
     }
 
-    public void btnFindGymClick(View v)
+    public void sendShareIntent()
     {
-        Uri geo = Uri.parse("geo:0,0?q=gym");
-        showMap(geo);
+        startActivity(Intent.createChooser(getShareIntent(), getResources().getText(R.string.share_your_streak)));
     }
 
-    public void btnShareClick(View v)
+    private void updateShareIntent() {
+        setShareIntent(getShareIntent());
+    }
+
+    private Intent getShareIntent()
     {
         Intent sendIntent = new Intent();
         sendIntent.setAction(Intent.ACTION_SEND);
         sendIntent.putExtra(Intent.EXTRA_TEXT, getShareString());
         sendIntent.setType("text/plain");
-        startActivity(Intent.createChooser(sendIntent, getResources().getText(R.string.share_your_streak)));
+        return sendIntent;
     }
 
     private String getShareString()
     {
-        if (currentStreak == 1)
-        {
-            return "I lifted today. Did You Lift Today? http://dylt.corb.co";
-        }
-        else
-        {
-            return String.format("I've lifted %d days in a row. Did You Lift Today? http://dylt.corb.co", currentStreak);
+        switch (currentStreak) {
+            case 0:
+                return "I didn't lift yet today. Did You Lift Today? http://dylt.corb.co";
+            case 1:
+                return "I lifted today. Did You Lift Today? http://dylt.corb.co";
+            default:
+                return String.format("I've lifted %d days in a row. Did You Lift Today? http://dylt.corb.co", currentStreak);
         }
     }
 
-    private void showMap(Uri geoLocation) {
+    public void findNearbyGyms()
+    {
+        Uri geoLocation = Uri.parse("geo:0,0?q=gym");
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setData(geoLocation);
         if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(intent);
         }
-    }
-
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-
     }
 
     /**

@@ -23,8 +23,8 @@
         android:layout_below="@+id/messageText"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="false"
-        android:layout_marginRight="26dp"
-        android:gravity="right"
+        android:layout_marginEnd="26dp"
+        android:gravity="end"
         android:layout_toRightOf="@+id/textView4"
         android:layout_toEndOf="@+id/textView4"
         android:layout_alignParentStart="false" />
@@ -41,7 +41,7 @@
         android:layout_alignEnd="@+id/bestStreakText"
         android:layout_alignLeft="@+id/bestStreakText"
         android:layout_alignStart="@+id/bestStreakText"
-        android:gravity="right" />
+        android:gravity="end" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -53,7 +53,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginStart="26dp"
-        android:gravity="left" />
+        android:gravity="start" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -66,7 +66,7 @@
         android:layout_alignStart="@+id/textView3"
         android:layout_alignRight="@+id/textView3"
         android:layout_alignEnd="@+id/textView3"
-        android:gravity="left" />
+        android:gravity="start" />
 
     <Button
         android:layout_width="wrap_content"
@@ -75,7 +75,6 @@
         android:id="@+id/shareButton"
         android:layout_below="@+id/bestStreakText"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="70dp"
-        android:onClick="btnShareClick" />
+        android:layout_marginTop="70dp" />
 
 </RelativeLayout>

@@ -2,26 +2,25 @@ package co.corb.dylt;
 
 import android.app.Activity;
 import android.app.Fragment;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
+import android.widget.Button;
 
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link DidNotLift.OnFragmentInteractionListener} interface
+ * {@link DidNotLift.DidNotLiftFragmentListener} interface
  * to handle interaction events.
  * Use the {@link DidNotLift#newInstance} factory method to
  * create an instance of this fragment.
  *
  */
-public class DidNotLift extends Fragment {
+public class DidNotLift extends Fragment implements View.OnClickListener{
 
-    private OnFragmentInteractionListener mListener;
+    private DidNotLiftFragmentListener mListener;
 
     /**
      * Use this factory method to create a new instance of
@@ -44,17 +43,33 @@ public class DidNotLift extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_did_not_lift, container, false);
+        View tempView = inflater.inflate(R.layout.fragment_did_not_lift, container, false);
+
+        Button findGymButton = (Button) tempView.findViewById(R.id.btnFindGym);
+        findGymButton.setOnClickListener(this);
+
+        return tempView;
     }
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         try {
-            mListener = (OnFragmentInteractionListener) activity;
+            mListener = (DidNotLiftFragmentListener) activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
-                    + " must implement OnFragmentInteractionListener");
+                    + " must implement DidNotLiftFragmentListener");
+        }
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.btnFindGym:
+                mListener.findNearbyGyms();
+                break;
+            default:
+                throw new RuntimeException("Invalid ID for this onClick handler.");
         }
     }
 
@@ -74,9 +89,8 @@ public class DidNotLift extends Fragment {
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        public void onFragmentInteraction(Uri uri);
+    public interface DidNotLiftFragmentListener {
+        public void findNearbyGyms();
     }
 
 }

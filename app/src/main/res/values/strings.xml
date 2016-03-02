@@ -3,6 +3,7 @@
 
     <string name="app_name">Lift</string>
     <string name="action_settings">Settings</string>
+    <string name="share">Share</string>
     <string name="did_you_lift_today_title">Did You Lift Today?</string>
     <string name="did_you_lift_today">Did you lift today?</string>
     <string name="yes">Yes</string>

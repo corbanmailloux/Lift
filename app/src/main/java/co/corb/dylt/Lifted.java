@@ -2,24 +2,24 @@ package co.corb.dylt;
 
 import android.app.Activity;
 import android.app.Fragment;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link Lifted.OnFragmentInteractionListener} interface
+ * {@link Lifted.LiftedFragmentListener} interface
  * to handle interaction events.
  * Use the {@link Lifted#newInstance} factory method to
  * create an instance of this fragment.
  *
  */
-public class Lifted extends Fragment {
+public class Lifted extends Fragment implements View.OnClickListener{
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "currentStreak";
     private static final String ARG_PARAM2 = "bestStreak";
@@ -28,7 +28,7 @@ public class Lifted extends Fragment {
     private int currentStreak, bestStreak;
     private boolean alreadyLiftedToday;
 
-    private OnFragmentInteractionListener mListener;
+    private LiftedFragmentListener mListener;
 
     /**
      * Use this factory method to create a new instance of
@@ -84,6 +84,9 @@ public class Lifted extends Fragment {
         TextView currentStreakText = (TextView) tempView.findViewById(R.id.currentStreakText);
         currentStreakText.setText(Integer.toString(currentStreak));
 
+        Button shareButton = (Button) tempView.findViewById(R.id.shareButton);
+        shareButton.setOnClickListener(this);
+
         return tempView;
     }
 
@@ -91,11 +94,36 @@ public class Lifted extends Fragment {
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         try {
-            mListener = (OnFragmentInteractionListener) activity;
+            mListener = (LiftedFragmentListener) activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
-                    + " must implement OnFragmentInteractionListener");
+                    + " must implement LiftedFragmentListener");
         }
+    }
+
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+        mListener.setShareVisible(true);
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.shareButton:
+                mListener.sendShareIntent();
+                break;
+            default:
+                throw new RuntimeException("Invalid ID for this onClick handler.");
+        }
+    }
+
+    @Override
+    public void onPause()
+    {
+        super.onPause();
+        mListener.setShareVisible(false);
     }
 
     @Override
@@ -114,9 +142,9 @@ public class Lifted extends Fragment {
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        public void onFragmentInteraction(Uri uri);
+    public interface LiftedFragmentListener {
+        public void setShareVisible(boolean visible);
+        public void sendShareIntent();
     }
 
 }

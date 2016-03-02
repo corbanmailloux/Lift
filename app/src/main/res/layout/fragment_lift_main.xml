@@ -20,8 +20,7 @@
         android:id="@+id/btnYes"
         android:layout_below="@+id/messageText"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="37dp"
-        android:onClick="btnYesClick" />
+        android:layout_marginTop="37dp" />
 
     <Button
         android:layout_width="wrap_content"
@@ -30,6 +29,5 @@
         android:id="@+id/btnNo"
         android:layout_below="@+id/btnYes"
         android:layout_alignLeft="@+id/btnYes"
-        android:layout_alignStart="@+id/btnYes"
-        android:onClick="btnNoClick" />
+        android:layout_alignStart="@+id/btnYes" />
 </RelativeLayout>
